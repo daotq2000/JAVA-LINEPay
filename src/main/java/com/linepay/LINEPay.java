@@ -11,37 +11,20 @@ import org.codehaus.jettison.json.JSONObject;
 public class LINEPay {
     public static String transactionId;
     public static String web;
-
-//    public static void main(String... args) {
-//        LINEPay.request();
-//        LINEPay.confirm();
-//    }
-
     public static void request() {
-        Map<String, String> data = new HashMap<String, String>();
-        data.put("productName", "สินค้าทดสอบ");
-        data.put("productImageUrl", "http://52.25.22.65:8005/api105/product.png");
-        data.put("amount", "1");
-        data.put("currency", "THB");
-        data.put("orderId", "17"); // เปลี่ยนเลื่อยๆ
+        Map<String, Object> data = new HashMap<>();
+        data.put("productName", "ProductSample");
+        data.put("productImageUrl", "https://d.line-scdn.net/linepay/portal/assets/img/linepay-logo-jp-gl.png?dm=1640659041602");
+            data.put("amount", "1");
+        data.put("currency", "TWD");
+        data.put("orderId", "ORD_i0q1kW0yFrOp0fCAvctq7g6Y3");
         data.put("confirmUrl", "http://localhost:8080/appUsers/confirm");
         data.put("cancelUrl", "http://localhost:8080/appUsers/cancel");
         data.put("capture", "true");
         data.put("confirmUrlType", "CLIENT");
+        data.put("payType", "NORMAL");
 
-//        data.put("productName", "สินค้าทดสอบ");
-//	data.put("checkConfirmUrlBrowser","false");
-//	data.put("productImageUrl", "https://line.ohmygodzilla.me/img/product.png");
-//	data.put("amount", "1");
-//	data.put("currency", "THB");
-//	data.put("orderId", "20190214072244");
-//	data.put("confirmUrl", "https://line.ohmygodzilla.me/page_confirm.php");
-//	data.put("cancelUrl", "https://line.ohmygodzilla.me/page_cancel.php");
-//	data.put("capture", "true");
-//	data.put("confirmUrlType", "SERVER");
-
-        JSONObject jObj = LINEPayAPI.request("https://api-pay.line.me/v2/payments/request", data);
-
+        JSONObject jObj = LINEPayAPI.request("https://sandbox-api-pay.line.me/v2/payments/request", data);
         try {
             System.out.println("");
             System.out.println("returnCode=>" + jObj.getString("returnCode"));

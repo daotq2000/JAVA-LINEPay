@@ -15,8 +15,8 @@ import java.util.logging.Logger;
 @Component
 public class LINEPayAPI {
 
-    static String channelId = "1646099554";
-    static String channelSecret = "636b9ef681cb68a076badd11c0381c8e";
+    static String channelId = "1656767968";
+    static String channelSecret = "235d2058df15f97e0b3717e240524454";
 
     public static JSONObject request(String strUrl, Map data) {
         try {
@@ -29,16 +29,12 @@ public class LINEPayAPI {
             conn.setRequestProperty("X-LINE-ChannelSecret", LINEPayAPI.channelSecret);
             conn.setDoOutput(true);
             ObjectMapper mapper = new ObjectMapper();
-
             DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
             mapper.writeValue((DataOutput) wr,data);
             wr.flush();
             wr.close();
 
             int responseCode = conn.getResponseCode();
-//            System.out.println("\nSending 'POST' request to URL : " + url);
-//            System.out.println("Response Code : " + responseCode);
-
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String inputLine;
             StringBuffer response = new StringBuffer();

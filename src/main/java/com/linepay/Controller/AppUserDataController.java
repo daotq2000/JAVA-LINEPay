@@ -19,21 +19,18 @@ public class AppUserDataController {
 
     @RequestMapping(value = "/confirm", method = RequestMethod.GET)
     public void confirm(@RequestParam("transactionId") String transactionId) {
-
+        System.out.println("CONFIRM");
         Map<String, String> data = new HashMap<String, String>();
         data.put("amount", "1");
-        data.put("currency", "THB");
+        data.put("currency", "TWD");
 
         System.out.println("transactionId=>"+ transactionId);
-        JSONObject jObj = LINEPayAPI.request("https://api-pay.line.me/v2/payments/" + transactionId + "/confirm", data);
-        try {
-            JSONObject infoOjb = jObj.getJSONObject("info");
-            System.out.println("orderId=>" + infoOjb.getString("orderId"));
-            System.out.println("transactionId=>" + infoOjb.getString("transactionId"));
-            System.out.println("returnCode=>" + jObj.getString("returnCode"));
-        } catch (JSONException ex) {
-            java.util.logging.Logger.getLogger(LINEPay.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        JSONObject jObj = LINEPayAPI.request("https://sandbox-api-pay.line.me/v2/payments/" + transactionId + "/confirm", data);
+        System.out.println(jObj.toString());
+//            JSONObject infoOjb = jObj.getJSONObject("info");
+//            System.out.println("orderId=>" + infoOjb.getString("orderId"));
+//            System.out.println("transactionId=>" + infoOjb.getString("transactionId"));
+//            System.out.println("returnCode=>" + jObj.getString("returnCode"));
     }
 
 }
